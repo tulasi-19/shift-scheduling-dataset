@@ -1,0 +1,14 @@
+[
+{"skill_id":"SKL-001","skill_name":"Tier-1 Support","skill_category":"SUPPORT","is_certification":0},
+{"skill_id":"SKL-002","skill_name":"Tier-2 Escalation","skill_category":"SUPPORT","is_certification":0},
+{"skill_id":"SKL-003","skill_name":"Billing Queries","skill_category":"SUPPORT","is_certification":0},
+{"skill_id":"SKL-004","skill_name":"Incident Response","skill_category":"IT_OPS","is_certification":1},
+{"skill_id":"SKL-005","skill_name":"Database Administration","skill_category":"IT_OPS","is_certification":0},
+{"skill_id":"SKL-006","skill_name":"Network Monitoring","skill_category":"IT_OPS","is_certification":0},
+{"skill_id":"SKL-007","skill_name":"Forklift Operation","skill_category":"LOGISTICS","is_certification":1},
+{"skill_id":"SKL-008","skill_name":"Inventory Control","skill_category":"LOGISTICS","is_certification":0},
+{"skill_id":"SKL-009","skill_name":"Dispatch Planning","skill_category":"LOGISTICS","is_certification":0},
+{"skill_id":"SKL-010","skill_name":"First Aid Responder","skill_category":"FACILITIES","is_certification":1},
+{"skill_id":"SKL-011","skill_name":"Security Patrol","skill_category":"FACILITIES","is_certification":0},
+{"skill_id":"SKL-012","skill_name":"Equipment Maintenance","skill_category":"FACILITIES","is_certification":0}
+]

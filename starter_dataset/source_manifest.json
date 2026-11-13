@@ -1,0 +1,257 @@
+{
+ "dataset": "synthetic_workforce_shift_scheduling",
+ "external_sources": [],
+ "files": {
+  "data/assignment_events.csv": {
+   "bytes": 167182,
+   "rows": 2597,
+   "sha256": "7f0bcfeaf355c42f7eaa2bc884ec4eceef98fe7f7c85831c0c8dcbb85ea92108"
+  },
+  "data/attendance_events.csv": {
+   "bytes": 468508,
+   "rows": 5027,
+   "sha256": "e1885d4aef106f1bd054fd35f8968df169e1c0352f1541a83d69c7eb08ae3546"
+  },
+  "data/coverage_requirements.csv": {
+   "bytes": 3427,
+   "rows": 70,
+   "sha256": "6677904b303c236f59fa11c10411776604ad2a33d678871fab602356227124eb"
+  },
+  "data/derived/coverage_results.csv": {
+   "bytes": 173585,
+   "rows": 2010,
+   "sha256": "b250f69d776082b569135ba1cb3cd7a834111cb9867e15932e3a2a315289b08b"
+  },
+  "data/derived/leave_balances.csv": {
+   "bytes": 13450,
+   "rows": 561,
+   "sha256": "63f63c3e7b3729e89f4c99282c5611b9b69205bd245f4272ad18262bf69f84e5"
+  },
+  "data/derived/weekly_hours.csv": {
+   "bytes": 56678,
+   "rows": 887,
+   "sha256": "80d2ffe0937ad5aa6f230a724ab06385dc877c0c7441647b6f44718194764883"
+  },
+  "data/employee_skills.csv": {
+   "bytes": 8555,
+   "rows": 256,
+   "sha256": "a595c5f82d89a87b6f064587fa5f61fdc9b628ee0e6040e67e3d079238cd4310"
+  },
+  "data/employees.csv": {
+   "bytes": 22272,
+   "rows": 200,
+   "sha256": "333efa14345c7283a1a23d387f1c21defd1148f930c9280758d65d7dd741d424"
+  },
+  "data/holiday_calendar.csv": {
+   "bytes": 221,
+   "rows": 3,
+   "sha256": "0060165fa7f6d58423c489d11df9705015fe8e248c901b46681575158abc1b72"
+  },
+  "data/leave_request_events.csv": {
+   "bytes": 76331,
+   "rows": 1016,
+   "sha256": "8257ebff3443f53860be5e1c5d6d02b90389efe4f97c685c31aafb594a5dbb42"
+  },
+  "data/leave_requests.csv": {
+   "bytes": 67049,
+   "rows": 500,
+   "sha256": "661e74d6d4508b918876883230e7ca828ee0d93d89ee93b2288db4129d666d3b"
+  },
+  "data/shift_assignments.csv": {
+   "bytes": 385910,
+   "rows": 2572,
+   "sha256": "e8995518be5c6c7d737010ab66b5bbed42211878fab6e5e22904ad445225edaf"
+  },
+  "data/shift_templates.csv": {
+   "bytes": 252,
+   "rows": 3,
+   "sha256": "5a4d8e5f05b85913ae9b70f2560469932480df64f0e4a6fde1572c8393afc5ae"
+  },
+  "data/skills.csv": {
+   "bytes": 503,
+   "rows": 12,
+   "sha256": "d6af8b0d35b0a249fc6aee1de35c7a68e1e97d8e7b12bb7d9a64d8f55bc7670b"
+  },
+  "data/swap_events.csv": {
+   "bytes": 12080,
+   "rows": 164,
+   "sha256": "61541a43d1c63161d99265d44a6ba364968dcad7148a052d315439b8ab9e0258"
+  },
+  "data/swap_requests.csv": {
+   "bytes": 13446,
+   "rows": 72,
+   "sha256": "3c166112a8d3c94a8d4ef4c18655d6749eac69c227cde413e3102a263ae594b4"
+  },
+  "data/team_shift_templates.csv": {
+   "bytes": 711,
+   "rows": 26,
+   "sha256": "8140701559ff23b31dbe8be6ad6dd24127765362473d456bfd17895b623a75ef"
+  },
+  "data/teams.csv": {
+   "bytes": 775,
+   "rows": 10,
+   "sha256": "d94fc53bf7908fded6132fd36161ed55be008e92fe4100352e857ae6f9445db0"
+  },
+  "docs/data_dictionary.json": {
+   "bytes": 36583,
+   "rows": null,
+   "sha256": "a0d0099933f0fb86fc00518875c4189bca8b9f8eaaba6bd3250823573a0a533e"
+  },
+  "docs/data_dictionary.md": {
+   "bytes": 18621,
+   "rows": null,
+   "sha256": "6526ca49b51db594480081629561ddf37a40567cdf42764f754596808d6a95fd"
+  },
+  "ground_truth/ground_truth.csv": {
+   "bytes": 6400,
+   "rows": 29,
+   "sha256": "215e83d420e3fd14c8fca5b8ad6395e0744efec386062c0b10228a1b5e3c6838"
+  },
+  "ground_truth/ground_truth.json": {
+   "bytes": 12136,
+   "rows": 29,
+   "sha256": "807d0162695333223812677945252894b1340fe878bd531c40b0262ff89f148b"
+  },
+  "json/assignment_events.json": {
+   "bytes": 421538,
+   "rows": 2597,
+   "sha256": "41e6b29e45f5a67d7fe6d0018eaa677275e2be3a69043b3fbb6f943dcde9785b"
+  },
+  "json/attendance_events.json": {
+   "bytes": 1142164,
+   "rows": 5027,
+   "sha256": "a8940b733453100698d0fb9b0222e8db7674290f78a67d163ad8f16c842b3b38"
+  },
+  "json/coverage_requirements.json": {
+   "bytes": 12692,
+   "rows": 70,
+   "sha256": "267b2f5d295b95815e1f881ea12a3e9fd15d8af41117cda90e9e2d58cc3d6efa"
+  },
+  "json/coverage_results.json": {
+   "bytes": 572973,
+   "rows": 2010,
+   "sha256": "9de26c2e977aa284874f3879c7571284c3f7853e6ecdac5488c9f8954967735a"
+  },
+  "json/employee_skills.json": {
+   "bytes": 31523,
+   "rows": 256,
+   "sha256": "ce5cf0069c32f5dce86df33bd95e9a568228f4b8733c3edcdca62d6fc4b7c040"
+  },
+  "json/employees.json": {
+   "bytes": 63370,
+   "rows": 200,
+   "sha256": "20bba5495d351db6bc08cd345abd3015d4502b191391f258e0e684c2817806cb"
+  },
+  "json/holiday_calendar.json": {
+   "bytes": 407,
+   "rows": 3,
+   "sha256": "232ac221bb5a69afc7b86965d7de63ecfe57281f43961106f590b2e9f09cf4b8"
+  },
+  "json/leave_balances.json": {
+   "bytes": 67230,
+   "rows": 561,
+   "sha256": "04ea6c6ffbd0215caddd8bfa952cf45ad64ddccbee88c40b38662a2aeab96a9e"
+  },
+  "json/leave_request_events.json": {
+   "bytes": 172771,
+   "rows": 1016,
+   "sha256": "dd0a1d4fec2052dc62a4c2a76860bcbbe7474a8320d69d34f167b8d5d063ff9e"
+  },
+  "json/leave_requests.json": {
+   "bytes": 161382,
+   "rows": 500,
+   "sha256": "f08d48f22e077d2494edfc3af0a7096a0c09a5b985d44a6da62ed8f8324e8ca0"
+  },
+  "json/shift_assignments.json": {
+   "bytes": 910410,
+   "rows": 2572,
+   "sha256": "8cf9872552f03ad4a97be6aa9a88e959ad5e16ea5908df41a0eb4827f94b1bd4"
+  },
+  "json/shift_templates.json": {
+   "bytes": 606,
+   "rows": 3,
+   "sha256": "c7c622c7bb02949ea1e311011b143486c53515eb2fb2ffdd7631214ceb4735cb"
+  },
+  "json/skills.json": {
+   "bytes": 1282,
+   "rows": 12,
+   "sha256": "9fd583b413c85b4a10b85b28d4c8db0acd1cd06f452bad4e0cb51f9cf8e0d417"
+  },
+  "json/swap_events.json": {
+   "bytes": 27413,
+   "rows": 164,
+   "sha256": "884c41455149b153827e1eeeefc902da5343c784a78989cd5c909a866f3afefa"
+  },
+  "json/swap_requests.json": {
+   "bytes": 33766,
+   "rows": 72,
+   "sha256": "159d2050f0de5f189ceba28ceaa03fd8febb08cde7a466b497fba2faad7c83e6"
+  },
+  "json/team_shift_templates.json": {
+   "bytes": 1979,
+   "rows": 26,
+   "sha256": "3486fb0a69719d06f2ddfd35fbf1db9a7faf82b812cebc922471018fbd6a3ae4"
+  },
+  "json/teams.json": {
+   "bytes": 2037,
+   "rows": 10,
+   "sha256": "ef22cccaef347ed6a95af379afe33f9874b57bc240e6646cf423e56e2d4c3f01"
+  },
+  "json/weekly_hours.json": {
+   "bytes": 240114,
+   "rows": 887,
+   "sha256": "5fefbc6b698eb3c258e675d9532a9c2fa0deee57a56e7d6aa3f20887f13747f6"
+  },
+  "sql/schema.sql": {
+   "bytes": 9675,
+   "rows": null,
+   "sha256": "9b886e8e110fc7fd3cf7fa506a39502d78fd28793594a6ff6c8ae449cb81951c"
+  },
+  "sql/seed.sql": {
+   "bytes": 2383396,
+   "rows": null,
+   "sha256": "c98bb7665c628668186ab896f6f33698983df22a0ea7bb00f7030078f2d9e90a"
+  }
+ },
+ "generator_command": "python generate_data.py --employees 200 --teams 10 --days 30 --leaves 500 --seed 20261022 --start 2026-01-01 --formats csv,json,sql --out <dir>",
+ "parameters": {
+  "absence_rate": 0.025,
+  "days": 30,
+  "employees": 200,
+  "formats": [
+   "csv",
+   "json",
+   "sql"
+  ],
+  "inject_scale": null,
+  "leaves": 500,
+  "start": "2026-01-01",
+  "swaps": null,
+  "teams": 10
+ },
+ "provenance": "Fully synthetic. No external or personal data used. Holiday names/dates form an illustrative synthetic calendar (inspired by common Indian public holidays) and must not be used as an authoritative holiday source. Emails use the reserved example.invalid domain.",
+ "python_version": "3.12.3",
+ "row_counts": {
+  "assignment_events": 2597,
+  "attendance_events": 5027,
+  "coverage_requirements": 70,
+  "coverage_results": 2010,
+  "employee_skills": 256,
+  "employees": 200,
+  "holiday_calendar": 3,
+  "leave_balances": 561,
+  "leave_request_events": 1016,
+  "leave_requests": 500,
+  "shift_assignments": 2572,
+  "shift_templates": 3,
+  "skills": 12,
+  "swap_events": 164,
+  "swap_requests": 72,
+  "team_shift_templates": 26,
+  "teams": 10,
+  "weekly_hours": 887
+ },
+ "schema_version": "1.0",
+ "seed": 20261022,
+ "sqlite_foreign_key_check_violations": 0
+}

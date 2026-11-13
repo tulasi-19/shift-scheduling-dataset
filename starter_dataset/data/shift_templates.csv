@@ -1,0 +1,4 @@
+template_id,template_code,template_name,start_time,end_time,crosses_midnight,duration_hours,effective_from,effective_to
+TPL-A,A,Day,06:00,14:00,0,8.0,2026-01-01,
+TPL-B,B,Evening,14:00,22:00,0,8.0,2026-01-01,
+TPL-C,C,Night,22:00,06:00,1,8.0,2026-01-01,

@@ -1,0 +1,13 @@
+skill_id,skill_name,skill_category,is_certification
+SKL-001,Tier-1 Support,SUPPORT,0
+SKL-002,Tier-2 Escalation,SUPPORT,0
+SKL-003,Billing Queries,SUPPORT,0
+SKL-004,Incident Response,IT_OPS,1
+SKL-005,Database Administration,IT_OPS,0
+SKL-006,Network Monitoring,IT_OPS,0
+SKL-007,Forklift Operation,LOGISTICS,1
+SKL-008,Inventory Control,LOGISTICS,0
+SKL-009,Dispatch Planning,LOGISTICS,0
+SKL-010,First Aid Responder,FACILITIES,1
+SKL-011,Security Patrol,FACILITIES,0
+SKL-012,Equipment Maintenance,FACILITIES,0

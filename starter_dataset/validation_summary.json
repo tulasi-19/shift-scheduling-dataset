@@ -1,0 +1,1276 @@
+{
+ "dataset": "starter_dataset",
+ "total_checks": 195,
+ "passed": 195,
+ "failed": 0,
+ "checks": [
+  {
+   "check": "holiday_calendar: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "holiday_calendar: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "holiday_calendar: primary key unique (holiday_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "holiday_calendar.holiday_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "holiday_calendar.holiday_date: unique",
+   "group": "keys",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "holiday_calendar.region: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['IN-ALL']"
+  },
+  {
+   "check": "holiday_calendar.holiday_type: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['PUBLIC']"
+  },
+  {
+   "check": "skills: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "skills: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "skills: primary key unique (skill_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "skills.skill_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "skills.skill_name: unique",
+   "group": "keys",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "skills.skill_category: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['FACILITIES', 'IT_OPS', 'LOGISTICS', 'SUPPORT']"
+  },
+  {
+   "check": "skills.is_certification: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['0', '1']"
+  },
+  {
+   "check": "shift_templates: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "shift_templates: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "shift_templates: primary key unique (template_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "shift_templates.template_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "shift_templates.template_code: unique",
+   "group": "keys",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "shift_templates.template_code: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['A', 'B', 'C']"
+  },
+  {
+   "check": "shift_templates.template_name: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['Day', 'Evening', 'Night']"
+  },
+  {
+   "check": "shift_templates.crosses_midnight: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['0', '1']"
+  },
+  {
+   "check": "employees: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "employees: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "employees: primary key unique (employee_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "employees.employee_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "employees.role: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ASSOCIATE', 'HR_PARTNER', 'IT_OPS_PARTNER', 'SENIOR_ASSOCIATE', 'SYSTEM_ADMIN', 'TEAM_LEAD', 'TEAM_MANAGER']"
+  },
+  {
+   "check": "employees.employment_type: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['FULL_TIME', 'PART_TIME']"
+  },
+  {
+   "check": "employees.is_rostered: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['0', '1']"
+  },
+  {
+   "check": "employees.primary_shift_code: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['A', 'B', 'C']"
+  },
+  {
+   "check": "employees.status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ACTIVE', 'TERMINATED']"
+  },
+  {
+   "check": "employees.work_email: unique",
+   "group": "keys",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "teams: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "teams: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "teams: primary key unique (team_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "teams.team_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "teams.team_name: unique",
+   "group": "keys",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "teams.domain: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['FACILITIES', 'IT_OPS', 'LOGISTICS', 'SUPPORT']"
+  },
+  {
+   "check": "teams.status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ACTIVE', 'INACTIVE']"
+  },
+  {
+   "check": "team_shift_templates: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "team_shift_templates: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "team_shift_templates: primary key unique (team_id+template_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "employee_skills: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "employee_skills: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "employee_skills: primary key unique (employee_id+skill_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "employee_skills.proficiency_level: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['1', '2', '3']"
+  },
+  {
+   "check": "coverage_requirements: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "coverage_requirements: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "coverage_requirements: primary key unique (requirement_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "coverage_requirements.requirement_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "leave_requests: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "leave_requests: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "leave_requests: primary key unique (leave_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "leave_requests.leave_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "leave_requests.leave_type: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ANNUAL', 'CASUAL', 'SICK', 'UNPAID']"
+  },
+  {
+   "check": "leave_requests.status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['APPROVED', 'CANCELLED', 'REJECTED', 'SUBMITTED']"
+  },
+  {
+   "check": "leave_requests.decision_reason: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['COVERAGE_RISK', 'INSUFFICIENT_BALANCE', 'OVERLAPPING_LEAVE', 'WITHIN_POLICY']"
+  },
+  {
+   "check": "leave_request_events: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "leave_request_events: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "leave_request_events: primary key unique (event_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "leave_request_events.event_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "leave_request_events.from_status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['APPROVED', 'CANCELLED', 'REJECTED', 'SUBMITTED']"
+  },
+  {
+   "check": "leave_request_events.to_status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['APPROVED', 'CANCELLED', 'REJECTED', 'SUBMITTED']"
+  },
+  {
+   "check": "shift_assignments: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "shift_assignments: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "shift_assignments: primary key unique (assignment_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "shift_assignments.assignment_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "shift_assignments.shift_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "shift_assignments.status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ACTIVE', 'CANCELLED', 'SUPERSEDED']"
+  },
+  {
+   "check": "shift_assignments.assignment_source: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['MANUAL', 'SCHEDULER', 'SWAP']"
+  },
+  {
+   "check": "assignment_events: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "assignment_events: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "assignment_events: primary key unique (event_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "assignment_events.event_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "assignment_events.event_type: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['CANCELLED_REPLACED', 'CREATED', 'SUPERSEDED_BY_SWAP']"
+  },
+  {
+   "check": "swap_requests: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "swap_requests: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "swap_requests: primary key unique (swap_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "swap_requests.swap_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "swap_requests.shift_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "swap_requests.swap_type: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['COVER']"
+  },
+  {
+   "check": "swap_requests.reason_code: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['FAMILY', 'MEDICAL', 'OTHER', 'PERSONAL', 'TRANSPORT']"
+  },
+  {
+   "check": "swap_requests.status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['APPLIED', 'APPROVED', 'CANCELLED', 'REJECTED', 'REQUESTED']"
+  },
+  {
+   "check": "swap_requests.decision_reason: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ALREADY_ASSIGNED', 'CONSECUTIVE_DAYS', 'INACTIVE', 'ON_LEAVE', 'REST_VIOLATION', 'SKILL_MISMATCH', 'WEEKLY_CAP', 'WITHIN_RULES']"
+  },
+  {
+   "check": "swap_events: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "swap_events: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "swap_events: primary key unique (event_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "swap_events.event_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "swap_events.from_status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['APPLIED', 'APPROVED', 'CANCELLED', 'REJECTED', 'REQUESTED']"
+  },
+  {
+   "check": "swap_events.to_status: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['APPLIED', 'APPROVED', 'CANCELLED', 'REJECTED', 'REQUESTED']"
+  },
+  {
+   "check": "attendance_events: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "attendance_events: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "attendance_events: primary key unique (attendance_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "attendance_events.attendance_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "attendance_events.event_type: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ABSENT', 'CLOCK_IN', 'CLOCK_OUT']"
+  },
+  {
+   "check": "attendance_events.source: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['BADGE', 'MANUAL', 'MOBILE', 'SYSTEM']"
+  },
+  {
+   "check": "attendance_events.absence_reason: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['DOUBLE_BOOKED_CONFLICT', 'NO_SHOW', 'ON_APPROVED_LEAVE', 'SICK_CALL']"
+  },
+  {
+   "check": "coverage_results: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "coverage_results: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "coverage_results: primary key unique (result_id)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "coverage_results.result_id: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "coverage_results.is_holiday: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['0', '1']"
+  },
+  {
+   "check": "weekly_hours: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "weekly_hours: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "weekly_hours: primary key unique (employee_id+iso_week)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "weekly_hours.iso_week: ID/format",
+   "group": "formats",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "weekly_hours.scheduled_exceeds_limit: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['0', '1']"
+  },
+  {
+   "check": "weekly_hours.worked_exceeds_limit: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['0', '1']"
+  },
+  {
+   "check": "leave_balances: header matches dictionary",
+   "group": "schema",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "leave_balances: required fields populated",
+   "group": "schema",
+   "status": "PASS",
+   "detail": "0 empty required cells"
+  },
+  {
+   "check": "leave_balances: primary key unique (employee_id+leave_type)",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 duplicates"
+  },
+  {
+   "check": "leave_balances.leave_type: allowed values",
+   "group": "enums",
+   "status": "PASS",
+   "detail": "0 outside ['ANNUAL', 'CASUAL', 'SICK']"
+  },
+  {
+   "check": "FK employees.team_id -> teams.team_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK employees.manager_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK teams.manager_employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK team_shift_templates.team_id -> teams.team_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK team_shift_templates.template_id -> shift_templates.template_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK employee_skills.employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK employee_skills.skill_id -> skills.skill_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK coverage_requirements.team_id -> teams.team_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK coverage_requirements.template_id -> shift_templates.template_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK coverage_requirements.skill_id -> skills.skill_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK leave_requests.employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK leave_requests.decided_by -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK leave_request_events.leave_id -> leave_requests.leave_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK leave_request_events.actor_employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK shift_assignments.team_id -> teams.team_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK shift_assignments.employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK shift_assignments.template_id -> shift_templates.template_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK shift_assignments.source_swap_id -> swap_requests.swap_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK assignment_events.assignment_id -> shift_assignments.assignment_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK assignment_events.actor_employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK assignment_events.swap_id -> swap_requests.swap_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_requests.requester_employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_requests.counterpart_employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_requests.requester_assignment_id -> shift_assignments.assignment_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_requests.new_assignment_id -> shift_assignments.assignment_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_requests.team_id -> teams.team_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_requests.decided_by -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_events.swap_id -> swap_requests.swap_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK swap_events.actor_employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK attendance_events.employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK attendance_events.assignment_id -> shift_assignments.assignment_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK coverage_results.requirement_id -> coverage_requirements.requirement_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK coverage_results.team_id -> teams.team_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK coverage_results.template_id -> shift_templates.template_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK coverage_results.skill_id -> skills.skill_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK weekly_hours.employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "FK leave_balances.employee_id -> employees.employee_id",
+   "group": "keys",
+   "status": "PASS",
+   "detail": "0 orphans"
+  },
+  {
+   "check": "teams.manager_employee_id has role TEAM_MANAGER",
+   "group": "relations",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "requirements/assignments only use shifts the team runs",
+   "group": "relations",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "rostered employees have team and primary shift",
+   "group": "relations",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "employees: end_date >= hire_date",
+   "group": "dates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "leave: end >= start; decided >= submitted; start >= hire_date",
+   "group": "dates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "leave: cancelled_at only when CANCELLED and after decided_at",
+   "group": "dates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "assignments: end_ts > start_ts, shift_date = date(start_ts), created_at <= start_ts",
+   "group": "dates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "assignments: shift_id matches shift_date + template",
+   "group": "dates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "swaps: requested <= decided <= applied; requested before shift",
+   "group": "dates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "requirements: effective_to >= effective_from",
+   "group": "dates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "requirements: no overlapping effective ranges per team/template/skill",
+   "group": "dates",
+   "status": "PASS",
+   "detail": "0 overlaps"
+  },
+  {
+   "check": "leave.days_requested = calendar days - public holidays",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "assignments.scheduled_hours = end_ts - start_ts",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "weekly_hours scheduled/worked reconcile with assignments + attendance",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "weekly_hours.overtime_hours = max(0, worked - cap)",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "weekly_hours hard limit and flags consistent",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": "0 mismatches"
+  },
+  {
+   "check": "leave_balances: closing = opening - approved",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "leave_balances.approved_days = sum of APPROVED days",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "coverage_results: gap formulas hold",
+   "group": "arithmetic",
+   "status": "PASS",
+   "detail": "0 rows"
+  },
+  {
+   "check": "leave events: legal transitions, unbroken chain, last event = status",
+   "group": "lifecycle",
+   "status": "PASS",
+   "detail": "illegal=0 broken=0 final_mismatch=0"
+  },
+  {
+   "check": "every leave request has history",
+   "group": "lifecycle",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "swap events: unbroken chain, last event = status",
+   "group": "lifecycle",
+   "status": "PASS",
+   "detail": "broken=0 final_mismatch=0"
+  },
+  {
+   "check": "every swap request has history",
+   "group": "lifecycle",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "assignment events preserve history (CREATED + SUPERSEDED/CANCELLED records)",
+   "group": "lifecycle",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "swap history preserved: APPLIED swap -> old row SUPERSEDED + new SWAP row linked",
+   "group": "lifecycle",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "non-applied swaps leave the roster untouched",
+   "group": "lifecycle",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "no duplicate leave requests (employee/start/end/type)",
+   "group": "duplicates",
+   "status": "PASS",
+   "detail": "0"
+  },
+  {
+   "check": "no duplicate attendance event per assignment/type",
+   "group": "duplicates",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "detector EMPLOYEE_DOUBLE_BOOKED: finds every ground-truth case, nothing else (precision=1.000, recall=1.000)",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": "detected=3 ground_truth=3"
+  },
+  {
+   "check": "detector APPROVED_LEAVE_OVERLAPS_SHIFT: finds every ground-truth case, nothing else (precision=1.000, recall=1.000)",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": "detected=3 ground_truth=3"
+  },
+  {
+   "check": "detector REQUIRED_SKILL_ABSENT: finds every ground-truth case, nothing else (precision=1.000, recall=1.000)",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": "detected=19 ground_truth=19"
+  },
+  {
+   "check": "detector OVERTIME_CAP_EXCEEDED: finds every ground-truth case, nothing else (precision=1.000, recall=1.000)",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": "detected=2 ground_truth=2"
+  },
+  {
+   "check": "detector SWAP_APPLIED_WITHOUT_APPROVAL: finds every ground-truth case, nothing else (precision=1.000, recall=1.000)",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": "detected=2 ground_truth=2"
+  },
+  {
+   "check": "duplicate (employee, date, shift) ACTIVE assignments equal the labelled double-bookings exactly",
+   "group": "duplicates",
+   "status": "PASS",
+   "detail": "found=3 labelled=3"
+  },
+  {
+   "check": "leave decisions replayed independently (overlap > balance > team concurrency cap) match every recorded decision",
+   "group": "decision_replay",
+   "status": "PASS",
+   "detail": "replayed=500 mismatches=0 outcomes={'WITHIN_POLICY': 333, 'OVERLAPPING_LEAVE': 65, 'COVERAGE_RISK': 93, 'INSUFFICIENT_BALANCE': 9}"
+  },
+  {
+   "check": "every non-injected swap decision is backed by evidence in the data (reason, manager, team, leave, rest, cap, skill)",
+   "group": "decision_replay",
+   "status": "PASS",
+   "detail": "checked=70 unsupported=0 {'APPLIED (approved)': '19/19', 'CANCELLED': '3/3', 'REJECTED ON_LEAVE': '16/16', 'REJECTED REST_VIOLATION': '23/23', 'REJECTED SKILL_MISMATCH': '3/3', 'REJECTED WEEKLY_CAP': '6/6'}"
+  },
+  {
+   "check": "working-hour rule R6 (>= 11h rest between shifts) holds on ACTIVE rows",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": "0 violations"
+  },
+  {
+   "check": "working-hour rule R7 (<= 6 consecutive days) holds",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": "0 violations"
+  },
+  {
+   "check": "worked hours stay within hard limit except labelled overtime weeks",
+   "group": "business_rules",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "attendance reconciles: every ACTIVE assignment has IN+OUT or one ABSENT",
+   "group": "attendance",
+   "status": "PASS",
+   "detail": "0 unreconciled"
+  },
+  {
+   "check": "no attendance for SUPERSEDED/CANCELLED assignments",
+   "group": "attendance",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "attendance_id embeds employee_id and event timestamp",
+   "group": "attendance",
+   "status": "PASS",
+   "detail": ""
+  },
+  {
+   "check": "ABSENT(ON_APPROVED_LEAVE) rows equal labelled leave conflicts",
+   "group": "attendance",
+   "status": "PASS",
+   "detail": "3"
+  },
+  {
+   "check": "no ground-truth column exists in any input/derived table",
+   "group": "leakage",
+   "status": "PASS",
+   "detail": "[]"
+  },
+  {
+   "check": "assignment_source is not a perfect proxy for injected rows (MANUAL also on baseline)",
+   "group": "leakage",
+   "status": "PASS",
+   "detail": "MANUAL on injected=6, MANUAL on baseline rows=109"
+  },
+  {
+   "check": "coverage requirements are met or gaps are reported (coverage_results covers every active requirement per shift)",
+   "group": "coverage",
+   "status": "PASS",
+   "detail": "{'requirement_slots_evaluated': 2010, 'scheduled_gap_rows': 22, 'actual_gap_rows': 59, 'fully_met_pct_scheduled': 98.91, 'fully_met_pct_actual': 97.06, 'skill_gap_rows': 19, 'headcount_gap_rows': 3}"
+  }
+ ],
+ "metrics": {
+  "coverage": {
+   "requirement_slots_evaluated": 2010,
+   "scheduled_gap_rows": 22,
+   "actual_gap_rows": 59,
+   "fully_met_pct_scheduled": 98.91,
+   "fully_met_pct_actual": 97.06,
+   "skill_gap_rows": 19,
+   "headcount_gap_rows": 3
+  },
+  "overtime": {
+   "employee_weeks": 887,
+   "weeks_with_overtime": 154,
+   "total_overtime_hours": 119.6,
+   "weeks_scheduled_over_limit": 2
+  },
+  "fairness": {
+   "mean_weekly_utilisation": 0.736,
+   "stdev": 0.247,
+   "p10": 0.4,
+   "p90": 1.0
+  },
+  "leave": {
+   "by_status": {
+    "CANCELLED": 16,
+    "APPROVED": 317,
+    "REJECTED": 167
+   },
+   "decision_reasons": {
+    "WITHIN_POLICY": 333,
+    "OVERLAPPING_LEAVE": 65,
+    "COVERAGE_RISK": 93,
+    "INSUFFICIENT_BALANCE": 9
+   }
+  },
+  "swaps": {
+   "by_status": {
+    "APPLIED": 21,
+    "REJECTED": 48,
+    "CANCELLED": 3
+   },
+   "decision_reasons": {
+    "WITHIN_RULES": 19,
+    "REST_VIOLATION": 23,
+    "ON_LEAVE": 16,
+    "WEEKLY_CAP": 7,
+    "SKILL_MISMATCH": 3
+   }
+  },
+  "absences": {
+   "SICK_CALL": 34,
+   "NO_SHOW": 27,
+   "DOUBLE_BOOKED_CONFLICT": 3,
+   "ON_APPROVED_LEAVE": 3
+  },
+  "assignments_by_status": {
+   "ACTIVE": 2547,
+   "SUPERSEDED": 21,
+   "CANCELLED": 4
+  },
+  "ground_truth": {
+   "EMPLOYEE_DOUBLE_BOOKED": {
+    "injected": 3,
+    "rule_derived": 0,
+    "detected": 3,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "APPROVED_LEAVE_OVERLAPS_SHIFT": {
+    "injected": 3,
+    "rule_derived": 0,
+    "detected": 3,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "REQUIRED_SKILL_ABSENT": {
+    "injected": 2,
+    "rule_derived": 17,
+    "detected": 19,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "OVERTIME_CAP_EXCEEDED": {
+    "injected": 2,
+    "rule_derived": 0,
+    "detected": 2,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "SWAP_APPLIED_WITHOUT_APPROVAL": {
+    "injected": 2,
+    "rule_derived": 0,
+    "detected": 2,
+    "precision": 1.0,
+    "recall": 1.0
+   }
+  }
+ }
+}

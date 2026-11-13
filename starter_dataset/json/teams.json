@@ -1,0 +1,12 @@
+[
+{"team_id":"TEAM-001","team_name":"Support Team 001","domain":"SUPPORT","manager_employee_id":"EMP-000001","max_concurrent_leave":4,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-002","team_name":"It Ops Team 002","domain":"IT_OPS","manager_employee_id":"EMP-000002","max_concurrent_leave":5,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-003","team_name":"Logistics Team 003","domain":"LOGISTICS","manager_employee_id":"EMP-000003","max_concurrent_leave":5,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-004","team_name":"Facilities Team 004","domain":"FACILITIES","manager_employee_id":"EMP-000004","max_concurrent_leave":4,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-005","team_name":"Support Team 005","domain":"SUPPORT","manager_employee_id":"EMP-000005","max_concurrent_leave":3,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-006","team_name":"It Ops Team 006","domain":"IT_OPS","manager_employee_id":"EMP-000006","max_concurrent_leave":4,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-007","team_name":"Logistics Team 007","domain":"LOGISTICS","manager_employee_id":"EMP-000007","max_concurrent_leave":2,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-008","team_name":"Facilities Team 008","domain":"FACILITIES","manager_employee_id":"EMP-000008","max_concurrent_leave":3,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-009","team_name":"Support Team 009","domain":"SUPPORT","manager_employee_id":"EMP-000009","max_concurrent_leave":2,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"},
+{"team_id":"TEAM-010","team_name":"It Ops Team 010","domain":"IT_OPS","manager_employee_id":"EMP-000010","max_concurrent_leave":2,"effective_from":"2026-01-01","effective_to":null,"status":"ACTIVE"}
+]

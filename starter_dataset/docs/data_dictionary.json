@@ -1,0 +1,1622 @@
+{
+ "tables": {
+  "holiday_calendar": {
+   "entity": "HolidayCalendar",
+   "derived": false,
+   "fields": [
+    {
+     "name": "holiday_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^HOL-\\d{4}-\\d{2}-\\d{2}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "HOL-<holiday_date>; immutable"
+    },
+    {
+     "name": "holiday_date",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "UNIQUE",
+     "fk": null,
+     "rule": "inside generated window; one row per date"
+    },
+    {
+     "name": "holiday_name",
+     "type": "string",
+     "required": true,
+     "allowed": "free text",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "non-empty; synthetic/illustrative calendar"
+    },
+    {
+     "name": "region",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:IN-ALL",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "single national calendar"
+    },
+    {
+     "name": "holiday_type",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:PUBLIC",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "public holidays use coverage_requirements.holiday_min_staff"
+    }
+   ]
+  },
+  "skills": {
+   "entity": "Skill",
+   "derived": false,
+   "fields": [
+    {
+     "name": "skill_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^SKL-\\d{3}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "SKL-001 upward; immutable"
+    },
+    {
+     "name": "skill_name",
+     "type": "string",
+     "required": true,
+     "allowed": "free text",
+     "unit": "-",
+     "unique": "UNIQUE",
+     "fk": null,
+     "rule": "non-empty"
+    },
+    {
+     "name": "skill_category",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:SUPPORT,IT_OPS,LOGISTICS,FACILITIES",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "equals the team.domain that uses the skill"
+    },
+    {
+     "name": "is_certification",
+     "type": "bool",
+     "required": true,
+     "allowed": "ENUM:0,1",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "1 = certificate that can expire (employee_skills.effective_to)"
+    }
+   ]
+  },
+  "shift_templates": {
+   "entity": "ShiftTemplate",
+   "derived": false,
+   "fields": [
+    {
+     "name": "template_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^TPL-[ABC]$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "TPL-<template_code>"
+    },
+    {
+     "name": "template_code",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:A,B,C",
+     "unit": "-",
+     "unique": "UNIQUE",
+     "fk": null,
+     "rule": "letter used inside shift_id"
+    },
+    {
+     "name": "template_name",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:Day,Evening,Night",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "start_time",
+     "type": "time",
+     "required": true,
+     "allowed": "HH:MM 24h",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "end_time",
+     "type": "time",
+     "required": true,
+     "allowed": "HH:MM 24h",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "(end - start) mod 24h = duration_hours"
+    },
+    {
+     "name": "crosses_midnight",
+     "type": "bool",
+     "required": true,
+     "allowed": "ENUM:0,1",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "1 iff end_time < start_time"
+    },
+    {
+     "name": "duration_hours",
+     "type": "float",
+     "required": true,
+     "allowed": "8.0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "> 0; paid hours of one shift"
+    },
+    {
+     "name": "effective_from",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "<= first schedule day"
+    },
+    {
+     "name": "effective_to",
+     "type": "date",
+     "required": false,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "NULL = open ended; >= effective_from"
+    }
+   ]
+  },
+  "employees": {
+   "entity": "Employee",
+   "derived": false,
+   "fields": [
+    {
+     "name": "employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^EMP-\\d{6}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "EMP-000001 upward; immutable"
+    },
+    {
+     "name": "team_id",
+     "type": "string",
+     "required": false,
+     "allowed": "TEAM-NNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "teams.team_id",
+     "rule": "NULL for HR/IT/admin actors; required when is_rostered=1"
+    },
+    {
+     "name": "manager_id",
+     "type": "string",
+     "required": false,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "team manager of the employee; NULL for managers/partners"
+    },
+    {
+     "name": "role",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:TEAM_MANAGER,TEAM_LEAD,SENIOR_ASSOCIATE,ASSOCIATE,HR_PARTNER,IT_OPS_PARTNER,SYSTEM_ADMIN",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "actor roles of the problem statement"
+    },
+    {
+     "name": "employment_type",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:FULL_TIME,PART_TIME",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "drives weekly_hour_cap"
+    },
+    {
+     "name": "is_rostered",
+     "type": "bool",
+     "required": true,
+     "allowed": "ENUM:0,1",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "1 = can receive shift assignments"
+    },
+    {
+     "name": "primary_shift_code",
+     "type": "string",
+     "required": false,
+     "allowed": "ENUM:A,B,C",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "NULL when is_rostered=0; must be a shift the team runs"
+    },
+    {
+     "name": "weekly_hour_cap",
+     "type": "float",
+     "required": true,
+     "allowed": "40.0 or 24.0",
+     "unit": "hours/week",
+     "unique": "-",
+     "fk": null,
+     "rule": "contract hours: FULL_TIME 40, PART_TIME 24"
+    },
+    {
+     "name": "overtime_cap_hours",
+     "type": "float",
+     "required": true,
+     "allowed": "4.0",
+     "unit": "hours/week",
+     "unique": "-",
+     "fk": null,
+     "rule": "hard limit = weekly_hour_cap + overtime_cap_hours"
+    },
+    {
+     "name": "hire_date",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "no assignment/leave before hire_date"
+    },
+    {
+     "name": "end_date",
+     "type": "date",
+     "required": false,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "NULL = still employed; >= hire_date"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:ACTIVE,TERMINATED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "TERMINATED iff end_date is not NULL"
+    },
+    {
+     "name": "work_email",
+     "type": "string",
+     "required": true,
+     "allowed": "emp-NNNNNN@example.invalid",
+     "unit": "-",
+     "unique": "UNIQUE",
+     "fk": null,
+     "rule": "synthetic, non-routable"
+    }
+   ]
+  },
+  "teams": {
+   "entity": "Team",
+   "derived": false,
+   "fields": [
+    {
+     "name": "team_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^TEAM-\\d{3}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "TEAM-001 upward; immutable"
+    },
+    {
+     "name": "team_name",
+     "type": "string",
+     "required": true,
+     "allowed": "free text",
+     "unit": "-",
+     "unique": "UNIQUE",
+     "fk": null,
+     "rule": "non-empty"
+    },
+    {
+     "name": "domain",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:SUPPORT,IT_OPS,LOGISTICS,FACILITIES",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "selects the 3-skill pool of the team"
+    },
+    {
+     "name": "manager_employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "role must be TEAM_MANAGER; approves leave and swaps"
+    },
+    {
+     "name": "max_concurrent_leave",
+     "type": "int",
+     "required": true,
+     "allowed": ">=1",
+     "unit": "people",
+     "unique": "-",
+     "fk": null,
+     "rule": "rule R-LV-03: approved leave per day may not exceed this"
+    },
+    {
+     "name": "effective_from",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "effective_to",
+     "type": "date",
+     "required": false,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "NULL = open ended"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:ACTIVE,INACTIVE",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    }
+   ]
+  },
+  "team_shift_templates": {
+   "entity": "(bridge) Team N:M ShiftTemplate",
+   "derived": false,
+   "fields": [
+    {
+     "name": "team_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TEAM-NNN",
+     "unit": "-",
+     "unique": "PK",
+     "fk": "teams.team_id",
+     "rule": "bridge team N:M shift_template"
+    },
+    {
+     "name": "template_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TPL-X",
+     "unit": "-",
+     "unique": "PK",
+     "fk": "shift_templates.template_id",
+     "rule": "shift runs for this team"
+    },
+    {
+     "name": "effective_from",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    }
+   ]
+  },
+  "employee_skills": {
+   "entity": "(bridge) Employee N:M Skill",
+   "derived": false,
+   "fields": [
+    {
+     "name": "employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "PK",
+     "fk": "employees.employee_id",
+     "rule": "bridge employee N:M skill"
+    },
+    {
+     "name": "skill_id",
+     "type": "string",
+     "required": true,
+     "allowed": "SKL-NNN",
+     "unit": "-",
+     "unique": "PK",
+     "fk": "skills.skill_id",
+     "rule": "-"
+    },
+    {
+     "name": "proficiency_level",
+     "type": "int",
+     "required": true,
+     "allowed": "ENUM:1,2,3",
+     "unit": "level",
+     "unique": "-",
+     "fk": null,
+     "rule": "1 basic, 3 expert"
+    },
+    {
+     "name": "effective_from",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "skill counts only from this date"
+    },
+    {
+     "name": "effective_to",
+     "type": "date",
+     "required": false,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "certificate expiry; NULL = does not expire; >= effective_from"
+    }
+   ]
+  },
+  "coverage_requirements": {
+   "entity": "CoverageRequirement",
+   "derived": false,
+   "fields": [
+    {
+     "name": "requirement_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^REQ-\\d{6}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "REQ-000001 upward; immutable"
+    },
+    {
+     "name": "team_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TEAM-NNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "teams.team_id",
+     "rule": "-"
+    },
+    {
+     "name": "template_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TPL-X",
+     "unit": "-",
+     "unique": "-",
+     "fk": "shift_templates.template_id",
+     "rule": "must be a shift the team runs"
+    },
+    {
+     "name": "skill_id",
+     "type": "string",
+     "required": false,
+     "allowed": "SKL-NNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "skills.skill_id",
+     "rule": "NULL = headcount requirement (any skill)"
+    },
+    {
+     "name": "min_staff",
+     "type": "int",
+     "required": true,
+     "allowed": ">=1",
+     "unit": "people per shift",
+     "unique": "-",
+     "fk": null,
+     "rule": "minimum scheduled people (with the skill if skill_id set)"
+    },
+    {
+     "name": "holiday_min_staff",
+     "type": "int",
+     "required": true,
+     "allowed": ">=1, <= min_staff",
+     "unit": "people per shift",
+     "unique": "-",
+     "fk": null,
+     "rule": "applies on public holidays"
+    },
+    {
+     "name": "effective_from",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "ranges for the same team/template/skill never overlap"
+    },
+    {
+     "name": "effective_to",
+     "type": "date",
+     "required": false,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "NULL = open ended"
+    }
+   ]
+  },
+  "leave_requests": {
+   "entity": "LeaveRequest",
+   "derived": false,
+   "fields": [
+    {
+     "name": "leave_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^LVE-\\d{4}-\\d{6}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "LVE-<schedule year>-<counter>, counter in submission order"
+    },
+    {
+     "name": "employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "rostered employee"
+    },
+    {
+     "name": "leave_type",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:ANNUAL,SICK,CASUAL,UNPAID",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "start_date",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": ">= hire_date"
+    },
+    {
+     "name": "end_date",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": ">= start_date"
+    },
+    {
+     "name": "days_requested",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "days",
+     "unique": "-",
+     "fk": null,
+     "rule": "derived: calendar days start..end minus public holidays"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:SUBMITTED,APPROVED,REJECTED,CANCELLED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "equals to_status of the last leave_request_events row"
+    },
+    {
+     "name": "submitted_at",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "decided_at",
+     "type": "datetime",
+     "required": false,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": ">= submitted_at; NULL while SUBMITTED"
+    },
+    {
+     "name": "decided_by",
+     "type": "string",
+     "required": false,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "team manager"
+    },
+    {
+     "name": "decision_reason",
+     "type": "string",
+     "required": false,
+     "allowed": "ENUM:WITHIN_POLICY,INSUFFICIENT_BALANCE,COVERAGE_RISK,OVERLAPPING_LEAVE",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "rule code that produced the decision"
+    },
+    {
+     "name": "cancelled_at",
+     "type": "datetime",
+     "required": false,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "only when status=CANCELLED; > decided_at"
+    }
+   ]
+  },
+  "leave_request_events": {
+   "entity": "(event history) LeaveRequest",
+   "derived": false,
+   "fields": [
+    {
+     "name": "event_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^LEVT-\\d{7}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "leave_id",
+     "type": "string",
+     "required": true,
+     "allowed": "LVE-YYYY-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "leave_requests.leave_id",
+     "rule": "-"
+    },
+    {
+     "name": "from_status",
+     "type": "string",
+     "required": false,
+     "allowed": "ENUM:SUBMITTED,APPROVED,REJECTED,CANCELLED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "NULL only for the first event"
+    },
+    {
+     "name": "to_status",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:SUBMITTED,APPROVED,REJECTED,CANCELLED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "legal: NULL>SUBMITTED, SUBMITTED>APPROVED/REJECTED, APPROVED>CANCELLED"
+    },
+    {
+     "name": "event_ts",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "non-decreasing per leave"
+    },
+    {
+     "name": "actor_employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "requester or manager"
+    }
+   ]
+  },
+  "shift_assignments": {
+   "entity": "ShiftAssignment",
+   "derived": false,
+   "fields": [
+    {
+     "name": "assignment_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^ASG-\\d{7}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "surrogate key; one row per employee per shift"
+    },
+    {
+     "name": "shift_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^SHIFT-\\d{4}-\\d{2}-\\d{2}-[ABC]$",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "SHIFT-<date>-<template_code>; identifies the calendar slot (many assignments share it)"
+    },
+    {
+     "name": "team_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TEAM-NNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "teams.team_id",
+     "rule": "team whose requirement the employee covers"
+    },
+    {
+     "name": "employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "-"
+    },
+    {
+     "name": "template_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TPL-X",
+     "unit": "-",
+     "unique": "-",
+     "fk": "shift_templates.template_id",
+     "rule": "-"
+    },
+    {
+     "name": "shift_date",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "date the shift starts; must match shift_id"
+    },
+    {
+     "name": "start_ts",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "shift_date + template start_time"
+    },
+    {
+     "name": "end_ts",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "> start_ts"
+    },
+    {
+     "name": "scheduled_hours",
+     "type": "float",
+     "required": true,
+     "allowed": "8.0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "derived: (end_ts - start_ts) in hours"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:ACTIVE,SUPERSEDED,CANCELLED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "history is kept: swapped/cancelled rows are never deleted"
+    },
+    {
+     "name": "assignment_source",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:SCHEDULER,MANUAL,SWAP",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "MANUAL also occurs on ordinary rows"
+    },
+    {
+     "name": "source_swap_id",
+     "type": "string",
+     "required": false,
+     "allowed": "SWP-YYYY-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "swap_requests.swap_id",
+     "rule": "set when assignment_source=SWAP"
+    },
+    {
+     "name": "created_at",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "<= start_ts"
+    }
+   ]
+  },
+  "assignment_events": {
+   "entity": "(event history) ShiftAssignment",
+   "derived": false,
+   "fields": [
+    {
+     "name": "event_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^AEV-\\d{7}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "assignment_id",
+     "type": "string",
+     "required": true,
+     "allowed": "ASG-NNNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "shift_assignments.assignment_id",
+     "rule": "-"
+    },
+    {
+     "name": "event_type",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:CREATED,SUPERSEDED_BY_SWAP,CANCELLED_REPLACED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "event_ts",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "actor_employee_id",
+     "type": "string",
+     "required": false,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "manager who changed the roster"
+    },
+    {
+     "name": "swap_id",
+     "type": "string",
+     "required": false,
+     "allowed": "SWP-YYYY-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "swap_requests.swap_id",
+     "rule": "set for swap-related events"
+    }
+   ]
+  },
+  "swap_requests": {
+   "entity": "SwapRequest",
+   "derived": false,
+   "fields": [
+    {
+     "name": "swap_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^SWP-\\d{4}-\\d{6}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "SWP-<schedule year>-<counter>, counter in request order"
+    },
+    {
+     "name": "requester_employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "current owner of the assignment"
+    },
+    {
+     "name": "counterpart_employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "teammate asked to take the shift; != requester"
+    },
+    {
+     "name": "requester_assignment_id",
+     "type": "string",
+     "required": true,
+     "allowed": "ASG-NNNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "shift_assignments.assignment_id",
+     "rule": "the assignment handed over"
+    },
+    {
+     "name": "new_assignment_id",
+     "type": "string",
+     "required": false,
+     "allowed": "ASG-NNNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "shift_assignments.assignment_id",
+     "rule": "assignment created for the counterpart; only when APPLIED"
+    },
+    {
+     "name": "team_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TEAM-NNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "teams.team_id",
+     "rule": "-"
+    },
+    {
+     "name": "shift_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^SHIFT-\\d{4}-\\d{2}-\\d{2}-[ABC]$",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "slot being covered"
+    },
+    {
+     "name": "shift_date",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "swap_type",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:COVER",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "one-way shift cover (counterpart takes the shift)"
+    },
+    {
+     "name": "reason_code",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:PERSONAL,MEDICAL,FAMILY,TRANSPORT,OTHER",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:REQUESTED,APPROVED,REJECTED,CANCELLED,APPLIED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "equals to_status of the last swap_events row"
+    },
+    {
+     "name": "requested_at",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "before shift start"
+    },
+    {
+     "name": "decided_at",
+     "type": "datetime",
+     "required": false,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": ">= requested_at; NULL if no manager decision exists"
+    },
+    {
+     "name": "decided_by",
+     "type": "string",
+     "required": false,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "team manager"
+    },
+    {
+     "name": "decision_reason",
+     "type": "string",
+     "required": false,
+     "allowed": "ENUM:WITHIN_RULES,INACTIVE,ON_LEAVE,ALREADY_ASSIGNED,REST_VIOLATION,CONSECUTIVE_DAYS,WEEKLY_CAP,SKILL_MISMATCH",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "first failed rule, or WITHIN_RULES"
+    },
+    {
+     "name": "applied_at",
+     "type": "datetime",
+     "required": false,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": ">= decided_at; only when APPLIED"
+    }
+   ]
+  },
+  "swap_events": {
+   "entity": "(event history) SwapRequest",
+   "derived": false,
+   "fields": [
+    {
+     "name": "event_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^SWE-\\d{6}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "swap_id",
+     "type": "string",
+     "required": true,
+     "allowed": "SWP-YYYY-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "swap_requests.swap_id",
+     "rule": "-"
+    },
+    {
+     "name": "from_status",
+     "type": "string",
+     "required": false,
+     "allowed": "ENUM:REQUESTED,APPROVED,REJECTED,CANCELLED,APPLIED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "NULL only for the first event"
+    },
+    {
+     "name": "to_status",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:REQUESTED,APPROVED,REJECTED,CANCELLED,APPLIED",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "legal: NULL>REQUESTED, REQUESTED>APPROVED/REJECTED/CANCELLED, APPROVED>APPLIED"
+    },
+    {
+     "name": "event_ts",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "non-decreasing per swap"
+    },
+    {
+     "name": "actor_employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "requester or manager"
+    }
+   ]
+  },
+  "attendance_events": {
+   "entity": "AttendanceEvent",
+   "derived": false,
+   "fields": [
+    {
+     "name": "attendance_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^ATT-EMP-\\d{6}-\\d{8}T\\d{6}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "ATT-<employee_id>-<YYYYMMDDTHHMMSS of event_ts>"
+    },
+    {
+     "name": "employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "employees.employee_id",
+     "rule": "-"
+    },
+    {
+     "name": "assignment_id",
+     "type": "string",
+     "required": false,
+     "allowed": "ASG-NNNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "shift_assignments.assignment_id",
+     "rule": "always an ACTIVE assignment in this dataset"
+    },
+    {
+     "name": "event_type",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:CLOCK_IN,CLOCK_OUT,ABSENT",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "each ACTIVE assignment has CLOCK_IN+CLOCK_OUT or one ABSENT"
+    },
+    {
+     "name": "event_ts",
+     "type": "datetime",
+     "required": true,
+     "allowed": "ISO-8601",
+     "unit": "local time",
+     "unique": "-",
+     "fk": null,
+     "rule": "CLOCK_OUT > CLOCK_IN"
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:BADGE,MOBILE,MANUAL,SYSTEM",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "ABSENT rows use SYSTEM"
+    },
+    {
+     "name": "absence_reason",
+     "type": "string",
+     "required": false,
+     "allowed": "ENUM:SICK_CALL,NO_SHOW,ON_APPROVED_LEAVE,DOUBLE_BOOKED_CONFLICT",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "only for ABSENT"
+    },
+    {
+     "name": "variance_minutes",
+     "type": "int",
+     "required": false,
+     "allowed": "integer",
+     "unit": "minutes",
+     "unique": "-",
+     "fk": null,
+     "rule": "derived: CLOCK_IN - scheduled start, CLOCK_OUT - scheduled end; NULL for ABSENT"
+    }
+   ]
+  },
+  "coverage_results": {
+   "entity": "(derived) CoverageRequirement result",
+   "derived": true,
+   "fields": [
+    {
+     "name": "result_id",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^CRES-\\d{7}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "derived output, not an input feature table"
+    },
+    {
+     "name": "requirement_id",
+     "type": "string",
+     "required": true,
+     "allowed": "REQ-NNNNNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "coverage_requirements.requirement_id",
+     "rule": "requirement active on shift_date"
+    },
+    {
+     "name": "team_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TEAM-NNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "teams.team_id",
+     "rule": "-"
+    },
+    {
+     "name": "shift_id",
+     "type": "string",
+     "required": true,
+     "allowed": "SHIFT-YYYY-MM-DD-X",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "shift_date",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "-"
+    },
+    {
+     "name": "template_id",
+     "type": "string",
+     "required": true,
+     "allowed": "TPL-X",
+     "unit": "-",
+     "unique": "-",
+     "fk": "shift_templates.template_id",
+     "rule": "-"
+    },
+    {
+     "name": "skill_id",
+     "type": "string",
+     "required": false,
+     "allowed": "SKL-NNN",
+     "unit": "-",
+     "unique": "-",
+     "fk": "skills.skill_id",
+     "rule": "NULL = headcount"
+    },
+    {
+     "name": "is_holiday",
+     "type": "bool",
+     "required": true,
+     "allowed": "ENUM:0,1",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "shift_date in holiday_calendar"
+    },
+    {
+     "name": "required_staff",
+     "type": "int",
+     "required": true,
+     "allowed": ">=1",
+     "unit": "people",
+     "unique": "-",
+     "fk": null,
+     "rule": "holiday_min_staff if is_holiday else min_staff"
+    },
+    {
+     "name": "scheduled_staff",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "people",
+     "unique": "-",
+     "fk": null,
+     "rule": "ACTIVE assignments in the slot (with the skill valid on the date)"
+    },
+    {
+     "name": "present_staff",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "people",
+     "unique": "-",
+     "fk": null,
+     "rule": "scheduled people with a CLOCK_IN"
+    },
+    {
+     "name": "scheduled_gap",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "people",
+     "unique": "-",
+     "fk": null,
+     "rule": "max(0, required - scheduled)"
+    },
+    {
+     "name": "actual_gap",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "people",
+     "unique": "-",
+     "fk": null,
+     "rule": "max(0, required - present)"
+    }
+   ]
+  },
+  "weekly_hours": {
+   "entity": "(derived) weekly hours / overtime",
+   "derived": true,
+   "fields": [
+    {
+     "name": "employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "PK",
+     "fk": "employees.employee_id",
+     "rule": "derived; one row per employee-week with activity"
+    },
+    {
+     "name": "iso_week",
+     "type": "string",
+     "required": true,
+     "allowed": "FMT:^\\d{4}-W\\d{2}$",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "ISO week of shift_date"
+    },
+    {
+     "name": "week_start",
+     "type": "date",
+     "required": true,
+     "allowed": "ISO-8601 date",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "Monday of the ISO week"
+    },
+    {
+     "name": "scheduled_hours",
+     "type": "float",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "sum of ACTIVE scheduled_hours in the week"
+    },
+    {
+     "name": "worked_hours",
+     "type": "float",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "sum of CLOCK_OUT - CLOCK_IN"
+    },
+    {
+     "name": "contract_cap_hours",
+     "type": "float",
+     "required": true,
+     "allowed": ">0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "employees.weekly_hour_cap"
+    },
+    {
+     "name": "overtime_cap_hours",
+     "type": "float",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "employees.overtime_cap_hours"
+    },
+    {
+     "name": "hard_limit_hours",
+     "type": "float",
+     "required": true,
+     "allowed": ">0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "contract_cap + overtime_cap"
+    },
+    {
+     "name": "overtime_hours",
+     "type": "float",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "hours",
+     "unique": "-",
+     "fk": null,
+     "rule": "max(0, worked_hours - contract_cap)"
+    },
+    {
+     "name": "scheduled_exceeds_limit",
+     "type": "bool",
+     "required": true,
+     "allowed": "ENUM:0,1",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "scheduled_hours > hard_limit_hours"
+    },
+    {
+     "name": "worked_exceeds_limit",
+     "type": "bool",
+     "required": true,
+     "allowed": "ENUM:0,1",
+     "unit": "-",
+     "unique": "-",
+     "fk": null,
+     "rule": "worked_hours > hard_limit_hours"
+    }
+   ]
+  },
+  "leave_balances": {
+   "entity": "(derived) leave balance",
+   "derived": true,
+   "fields": [
+    {
+     "name": "employee_id",
+     "type": "string",
+     "required": true,
+     "allowed": "EMP-NNNNNN",
+     "unit": "-",
+     "unique": "PK",
+     "fk": "employees.employee_id",
+     "rule": "derived"
+    },
+    {
+     "name": "leave_type",
+     "type": "string",
+     "required": true,
+     "allowed": "ENUM:ANNUAL,SICK,CASUAL",
+     "unit": "-",
+     "unique": "PK",
+     "fk": null,
+     "rule": "UNPAID has no balance"
+    },
+    {
+     "name": "opening_balance_days",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "days",
+     "unique": "-",
+     "fk": null,
+     "rule": "allowance for the generated window"
+    },
+    {
+     "name": "approved_days",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "days",
+     "unique": "-",
+     "fk": null,
+     "rule": "sum days_requested of APPROVED leaves of that type"
+    },
+    {
+     "name": "closing_balance_days",
+     "type": "int",
+     "required": true,
+     "allowed": ">=0",
+     "unit": "days",
+     "unique": "-",
+     "fk": null,
+     "rule": "opening - approved"
+    }
+   ]
+  }
+ }
+}
