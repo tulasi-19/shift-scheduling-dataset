@@ -15,6 +15,32 @@ python reproducibility_check.py --dataset dataset    # regenerates twice, compar
 Scale is fully parameterised (`--employees --teams --days --leaves --swaps --absence-rate --inject-scale --formats`).
 Every random phase uses its own `random.Random("<seed>:<phase>")` stream, so output is identical across runs and machines.
 
+## Requirements and setup
+* Python 3.9+ (tested on 3.10 / Windows and 3.12 / Linux). **No third-party packages, no configuration, no environment variables.**
+* Run the three commands in *Quick start*; success looks like `195/195 checks passed` and `PASS - both regenerations are byte-identical`.
+
+## Design decisions and trade-offs
+| Decision | Why | Trade-off |
+|---|---|---|
+| Standard library only | anyone can run it with no install | no pandas/solver conveniences |
+| One data dictionary drives docs, SQL DDL and the validator | schema, docs and checks cannot drift apart | dictionary is a plain-text table inside the generator |
+| Greedy, constraint-aware scheduler (skills first, then headcount, lowest utilisation first) | transparent and explainable rules | not globally optimal; some natural coverage gaps remain (and are reported) |
+| Baseline built clean, anomalies injected afterwards and labelled | ground truth is exact and unrelated rows are never silently corrupted | injected cases are synthetic by construction |
+| `shift_id` is a calendar slot; `assignment_id` is the row key | many people share one shift | interpretation of the ID convention in the brief |
+| Swaps modelled as one-way covers | keeps manager-approval rules and history simple | no two-way exchanges |
+| Separate random stream per phase (`"<seed>:<phase>"`) | changing one phase does not reshuffle the others; byte-identical reruns | none significant |
+| Independent validator that re-computes decisions | catches generator bugs instead of trusting them | duplicates some rule logic on purpose |
+
+## Testing approach (how I know it works)
+1. `validate_data.py`: 195 checks (keys, FKs, enums, dates, arithmetic, lifecycle, duplicates, attendance, leakage) plus decision replay for all leave and swap decisions.
+2. Detector check: independent detectors re-find every injected case (precision = recall = 1.0 for all five types).
+3. `reproducibility_check.py`: two regenerations are byte-identical (row counts and SHA-256).
+4. Other seeds: validator passes on 6 full-scale and 12 small seeds. A seed-1 run exposed a timestamp-ordering bug in the injected swap cases; it was fixed and re-tested.
+5. Negative test: after changing every `APPROVED` leave to `REJECTED` in a copy, the validator fails (4 checks) as it should.
+
+## AI usage
+LLM tools were used throughout. See [`AI_USAGE.md`](AI_USAGE.md) for what AI did, what I reviewed and validated, and [`PROMPT_HISTORY.md`](PROMPT_HISTORY.md) for the prompts.
+
 ## Folder layout
 | Path | Content |
 |---|---|
@@ -96,10 +122,7 @@ No source URLs/licences apply; `source_manifest.json` records `external_sources:
 * Some leave rejections for `OVERLAPPING_LEAVE` are higher than real life because requests are sampled independently per employee.
 * Attendance timestamps use naive local time; weeks at the window edges are partial.
 
-## Suggested next steps (matches your Python -> ML / Django / REST / WebSocket / Webhook path)
-1. **Python/pandas**: load `data/*.csv`, rebuild `weekly_hours` yourself and compare with the derived file.
-2. **Django**: turn `docs/data_dictionary.md` into models (the FKs are already defined); import the CSVs with a management command.
-3. **REST API**: endpoints for leave requests, swap requests, `GET /coverage?team=&date=`.
-4. **Webhook**: fire an event when a leave/swap decision is recorded (the `*_events` tables are the payload source).
-5. **WebSocket**: push live coverage-gap alerts to a manager dashboard.
-6. **ML**: predict `actual_gap` or absence from schedule features; evaluate anomaly detection against `ground_truth/` only (never as input features).
+## Possible extensions
+* Two-way shift exchanges, an optimiser-based scheduler (e.g. constraint programming) to compare with the greedy one.
+* A REST API over the tables, and a webhook fired when a leave/swap decision is recorded.
+* Absence / coverage-gap prediction models, evaluated against `ground_truth/` only (never used as input features).
